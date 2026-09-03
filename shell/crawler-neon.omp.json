@@ -1,0 +1,97 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "palette": {
+    "bubble": "#2A1836",
+    "gold": "#FAC234",
+    "magenta": "#FB03D6",
+    "red": "#FA2120",
+    "yellow": "#F3FB04",
+    "green": "#02FB03",
+    "orange": "#FC7E03",
+    "aqua": "#03FBC7",
+    "purple": "#B455F0",
+    "text": "#F5EFE3",
+    "soft": "#B9AEB4"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "path",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "background": "p:bubble",
+          "foreground": "p:gold",
+          "template": "\ue5ff {{ .Path }}",
+          "options": {
+            "style": "folder"
+          }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "background": "p:bubble",
+          "foreground": "p:magenta",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}",
+            "{{ if gt .Ahead 0 }}p:aqua{{ end }}",
+            "{{ if gt .Behind 0 }}p:aqua{{ end }}"
+          ],
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "options": {
+            "branch_template": "{{ trunc 25 .Branch }}"
+          }
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "background": "p:bubble",
+          "foreground": "p:aqua",
+          "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "background": "p:bubble",
+          "foreground": "p:soft",
+          "template": "{{ .FormattedMs }}",
+          "options": {
+            "style": "austin",
+            "threshold": 150
+          }
+        },
+        {
+          "type": "text",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "background": "p:bubble",
+          "foreground": "p:purple",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:red{{ end }}"
+          ],
+          "template": "{{ .UserName }} {{ if gt .Code 0 }}\u2717{{ else }}\u276f{{ end }}"
+        }
+      ]
+    }
+  ]
+}

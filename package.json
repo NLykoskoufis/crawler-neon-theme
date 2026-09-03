@@ -1,0 +1,49 @@
+{
+  "name": "crawler-neon-theme",
+  "displayName": "Crawler Neon",
+  "description": "Neon on black: a VS Code dark theme that takes one colour from each Dungeon Crawler Carl book jacket, with a light sibling.",
+  "version": "1.0.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.33.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NLykoskoufis/crawler-neon-theme.git"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Crawler Neon",
+        "uiTheme": "vs-dark",
+        "path": "./themes/crawler-neon-color-theme.json"
+      },
+      {
+        "label": "Crawler Deluxe",
+        "uiTheme": "vs",
+        "path": "./themes/crawler-deluxe-color-theme.json"
+      }
+    ]
+  },
+  "icon": "icon.png",
+  "keywords": [
+    "theme",
+    "color-theme",
+    "dark",
+    "light",
+    "neon",
+    "dungeon crawler carl"
+  ],
+  "galleryBanner": {
+    "color": "#0B0A0D",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/NLykoskoufis/crawler-neon-theme#readme",
+  "bugs": {
+    "url": "https://github.com/NLykoskoufis/crawler-neon-theme/issues"
+  }
+}

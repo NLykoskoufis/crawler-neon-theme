@@ -1,0 +1,105 @@
+/* Crawler Neon chrome — rounded, floating panes and widgets for the Crawler themes.
+   Pure CSS, no script. Scoped to the Crawler extension by the theme class VS Code
+   puts on the .monaco-workbench container; every colour comes from the active theme's CSS variables, so the
+   ten dark and light variants all work. Loaded via vscode_custom_css.imports.
+   Geometry is never changed: VS Code sizes parts from JavaScript, so this only
+   rounds, shadows and recolours what is already laid out. Rules that reshape tabs,
+   the code area or panel tabs apply to the classic UI only; VS Code's experimental
+   Modern UI brings its own versions and reads the theme's modern* colours. */
+
+/* The theme's darkest surface behind everything, so the rounded panes read as
+   cards floating on it, in both the dark and the light theme. */
+.monaco-workbench[class*="crawler-neon-theme"],
+.monaco-workbench[class*="crawler-neon-theme"] .part.editor > .content,
+.monaco-workbench[class*="crawler-neon-theme"] .part.editor > .content .editor-group-container > .editor-container {
+  background-color: var(--vscode-activityBar-background);
+}
+
+/* UI font: Inter when installed, the system face otherwise. Editor and terminal
+   set their own fonts inline, so they are untouched. */
+.monaco-workbench.mac[class*="crawler-neon-theme"] {
+  font-family: Inter, -apple-system, "SF Pro Text", system-ui, sans-serif;
+}
+
+/* The code area as a rounded card. */
+.monaco-workbench:not(.modern-ui)[class*="crawler-neon-theme"] .part.editor .editor-container .monaco-editor {
+  background-color: transparent;
+}
+.monaco-workbench:not(.modern-ui)[class*="crawler-neon-theme"] .part.editor .editor-container .monaco-editor .overflow-guard {
+  border-radius: 10px;
+}
+
+/* Sidebar, secondary sidebar and panel as rounded cards. */
+.monaco-workbench[class*="crawler-neon-theme"] .part.sidebar,
+.monaco-workbench[class*="crawler-neon-theme"] .part.auxiliarybar,
+.monaco-workbench[class*="crawler-neon-theme"] .part.panel {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Tabs: rounded tops, no hairline between tabs. */
+.monaco-workbench:not(.modern-ui)[class*="crawler-neon-theme"] .part.editor > .content .editor-group-container > .title .tabs-container > .tab {
+  border-radius: 8px 8px 0 0;
+  border-right-color: transparent !important;
+  margin-right: 2px;
+}
+
+/* Rounded current line and rounded list rows. */
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .view-overlays .current-line,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .margin-view-overlays .current-line-margin {
+  border-radius: 4px;
+}
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-list .monaco-list-row {
+  border-radius: 6px;
+}
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-list:focus .monaco-list-row.focused {
+  outline-offset: -1px;
+}
+
+/* Thin, rounded scrollbar sliders. The track keeps its width; the slider draws
+   a narrower pill inside it. */
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-scrollable-element > .scrollbar > .slider {
+  border-radius: 6px;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Command palette and quick open: frosted, rounded, lifted. */
+.monaco-workbench[class*="crawler-neon-theme"] .quick-input-widget {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--vscode-quickInput-background) 84%, transparent) !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--vscode-widget-border, var(--vscode-editorWidget-border));
+}
+.monaco-workbench[class*="crawler-neon-theme"] .quick-input-widget .quick-input-list .monaco-list-row {
+  border-radius: 8px;
+}
+
+/* Floating editor widgets, menus and toasts. */
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .suggest-widget,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .parameter-hints-widget,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .find-widget,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-editor .rename-box,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-hover,
+.monaco-workbench[class*="crawler-neon-theme"] .monaco-menu-container .monaco-menu,
+.monaco-workbench[class*="crawler-neon-theme"] .notification-toast,
+.monaco-workbench[class*="crawler-neon-theme"] .notifications-center {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+/* Activity icons (top or side): a soft pill behind the active one. */
+.monaco-workbench:not(.modern-ui)[class*="crawler-neon-theme"] .composite-bar .action-item.checked .action-label {
+  border-radius: 8px;
+  background-color: var(--vscode-toolbar-activeBackground, var(--vscode-list-activeSelectionBackground));
+}
+
+/* Panel tabs (TERMINAL, PROBLEMS, OUTPUT): the active one as the same tinted pill as the editor tabs. */
+.monaco-workbench:not(.modern-ui)[class*="crawler-neon-theme"] .part.panel > .title .composite-bar .monaco-action-bar .action-item.checked {
+  background-color: var(--vscode-tab-activeBackground);
+  border-radius: 8px;
+  padding: 0 6px;
+}
